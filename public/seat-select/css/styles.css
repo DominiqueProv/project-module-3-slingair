@@ -155,6 +155,7 @@ input {
     position: relative;
     height: 30px;
     width: 30px;
+
 }
 
 .seat input {
@@ -177,6 +178,10 @@ input {
     height: 30px;
     width: 30px;
     transition: all ease 300ms;
+}
+
+.occupiedSeat{
+    pointer-events: none;
 }
 
 .seat span.avail {

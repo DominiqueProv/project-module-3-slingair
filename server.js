@@ -22,9 +22,25 @@ app.use(express.urlencoded({ extended: false }))
 // endpoints
 app.get('/seatingavailability/:id', (req, res) => {
     const flightId = req.params.id;
-    res.json({list : flights[flightId]});
+    res.send(flights[flightId]);
     console.log(flights[flightId])
 });
+
+
+app.post('/userConfimation/', (req,res) => {
+    let userInfo = req.body;
+    reservations.push(userInfo);
+    res.send(userInfo)
+})
+
+app.get('/flightNumber', (req,res) => {
+    let listFlight = [];
+    for (let flightNo in flights){
+      listFlight.push(flightNo)
+    }
+    res.send(listFlight)
+})
+
 
 app.use((req, res) => res.send('Not Found'))
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
