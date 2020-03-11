@@ -5,9 +5,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const app = express();
 const PORT = process.env.PORT || 8000;
-const { flights } = require('./test-data/flightSeating');
-const { reservations } = require('./test-data/reservations');
-
+const { getFlight, getFlightInfo, confirmUser } = require('./test-data/handlers');
 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -20,28 +18,14 @@ app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: false }))
 
 // endpoints
-app.get('/seatingavailability/:id', (req, res) => {
-    const flightId = req.params.id;
-    res.send(flights[flightId]);
-    console.log(flights[flightId])
-});
+app.get('/seatingavailability/:flight', getFlightInfo)
+// app.post('/userConfimation/', (req, res) => {
+//     let userInfo = req.body;
+//     reservations.push(userInfo);
+//     res.send(userInfo)
+// })
 
-
-app.post('/userConfimation/', (req,res) => {
-    let userInfo = req.body;
-    reservations.push(userInfo);
-    res.send(userInfo)
-})
-
-app.get('/flightNumber', (req,res) => {
-    let listFlight = [];
-    for (let flightNo in flights){
-      listFlight.push(flightNo)
-    }
-    res.send(listFlight)
-})
-
-
+app.get('/flightNumber', getFlight)
+app.post('/userConfimation/', confirmUser)
 app.use((req, res) => res.send('Not Found'))
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
-

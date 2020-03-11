@@ -8,15 +8,17 @@
     </head>
     <body >
         <div class='main'>
+        
             <header class='header'>
                 <h1 class='header-logo'>Air Slingshot</h1>
             </div>
             <div class="flight-select">
                 <!-- <label for="flight">Flight Number :</label> -->
-                <input  id="flight" class="flight" type="text" />
-                <select name="flight" id="flight-selector" class="flight" >
+                <!-- <input  id="flight" class="flight" type="text" /> -->
+                <select name="flight" id="flight-selector" class="flight" onchange="toggleFormContent(event)" >
                     <option>Select a flight</option>
                 </select>
+                
             </div>
             
             <div class="form-container">
